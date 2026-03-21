@@ -1,0 +1,77 @@
+{
+  "name": "copilot-lm-proxy",
+  "displayName": "Copilot LM Proxy",
+  "description": "Exposes GitHub Copilot as a local OpenAI-compatible REST API via the VS Code Language Model API",
+  "version": "0.1.0",
+  "publisher": "gupa1012",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "copilot",
+    "llm",
+    "proxy",
+    "openai",
+    "language model"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copilot-lm-proxy.startServer",
+        "title": "Copilot LM Proxy: Start Server"
+      },
+      {
+        "command": "copilot-lm-proxy.stopServer",
+        "title": "Copilot LM Proxy: Stop Server"
+      }
+    ],
+    "configuration": {
+      "title": "Copilot LM Proxy",
+      "properties": {
+        "copilot-lm-proxy.port": {
+          "type": "number",
+          "default": 3030,
+          "description": "Port for the local proxy server to listen on."
+        },
+        "copilot-lm-proxy.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Optional API key required by clients. Leave empty to disable authentication."
+        },
+        "copilot-lm-proxy.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Host/interface for the proxy server to bind to. Defaults to localhost only."
+        },
+        "copilot-lm-proxy.autoStart": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically start the proxy server when VS Code is opened."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.0"
+  }
+}
